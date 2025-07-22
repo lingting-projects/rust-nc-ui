@@ -1,5 +1,6 @@
 import pageSystem from '@/locales/en-US/page-system';
 import pageUser from '@/locales/en-US/page-user';
+import utils from '@/locales/en-US/utils';
 import api from './en-US/api';
 import component from './en-US/component';
 import error from './en-US/error';
@@ -19,6 +20,7 @@ export default {
   ...error,
   ...component,
   ...holder,
+  ...utils,
   ...pageLogin,
   ...pageSystem,
   ...pageUser,

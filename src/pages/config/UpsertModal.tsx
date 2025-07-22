@@ -1,13 +1,13 @@
-import {AreaMultipleDict} from '@/components/Area';
-import {RadioDict} from '@/components/Dict';
+import { AreaMultipleDict } from '@/components/Area';
+import { RadioDict } from '@/components/Dict';
 import Icon from '@/components/Icon';
-import {webConfig, webRule, webSubscribe} from '@/services/web';
+import { webConfig, webRule, webSubscribe } from '@/services/web';
 import DataSizeUtils from '@/util/DataSizeUtils';
 import DateTimeUtils from '@/util/DateTimeUtils';
-import {ProFormField, ProFormGroup, ProFormItem, ProFormSelect} from '@ant-design/pro-components';
-import {ModalForm, ProFormText} from '@ant-design/pro-form';
-import {Form, Row, Space, Tag, Tooltip, Typography} from 'antd';
-import {useCallback, useEffect, useState} from 'react';
+import { ProFormField, ProFormGroup, ProFormItem, ProFormSelect } from '@ant-design/pro-components';
+import { ModalForm, ProFormText } from '@ant-design/pro-form';
+import { Form, Row, Space, Tag, Tooltip, Typography } from 'antd';
+import { useCallback, useEffect, useState } from 'react';
 
 type Props = {
   open: boolean;
@@ -69,7 +69,7 @@ export default ({open, close, vo}: Props) => {
       <ModalForm<CONFIG.Config, CONFIG.Config>
         open={open}
         form={form}
-        modalProps={{forceRender: true, maskClosable: false}}
+        modalProps={{ forceRender: true, maskClosable: false }}
         onOpenChange={(flag) => !flag && close()}
         title={`${!!vo?.id ? '修改' : '创建'}配置`}
         onFinish={async (values) =>
@@ -79,46 +79,46 @@ export default ({open, close, vo}: Props) => {
           })
         }
       >
-        <ProFormText name={'id'} hidden={true}/>
+        <ProFormText name={'id'} hidden={true} />
 
-        <ProFormText name={'name'} label={'配置名称'} rules={[{required: true}]}/>
+        <ProFormText name={'name'} label={'配置名称'} rules={[{ required: true }]} />
 
         <ProFormGroup>
           <ProFormField name={'tun'} label={'TUN模式'} initialValue={true}>
-            <RadioDict code={'EnableDict'} props={{optionType: 'button'}}/>
+            <RadioDict code={'EnableDict'} props={{ optionType: 'button' }} />
           </ProFormField>
           <ProFormField name={'fakeIp'} label={'FakeIP'} initialValue={true}>
-            <RadioDict code={'EnableDict'} props={{optionType: 'button'}}/>
+            <RadioDict code={'EnableDict'} props={{ optionType: 'button' }} />
           </ProFormField>
           <ProFormField name={'ipv6'} label={'IPv6'} initialValue={false}>
-            <RadioDict code={'EnableDict'} props={{optionType: 'button'}}/>
+            <RadioDict code={'EnableDict'} props={{ optionType: 'button' }} />
           </ProFormField>
           <ProFormField
             name={'directGeoCnIp'}
             label={
               <>
-                <Typography.Text style={{marginRight: '5px'}}>GeoCnIp</Typography.Text>
+                <Typography.Text style={{ marginRight: '5px' }}>GeoCnIp</Typography.Text>
                 <Tooltip title={'使用geo的中国ip数据库, 自动对中国ip进行直连'}>
-                  <Icon type={'QuestionCircleOutline'}/>
+                  <Icon type={'QuestionCircleOutline'} />
                 </Tooltip>
               </>
             }
             initialValue={true}
           >
-            <RadioDict code={'EnableDict'} props={{optionType: 'button'}}/>
+            <RadioDict code={'EnableDict'} props={{ optionType: 'button' }} />
           </ProFormField>
         </ProFormGroup>
 
         <ProFormSelect
           name={'subscribeId'}
           label={'订阅'}
-          fieldProps={{loading: subscribeLoading}}
-          rules={[{required: true, message: '请选择一个订阅'}]}
+          fieldProps={{ loading: subscribeLoading }}
+          rules={[{ required: true, message: '请选择一个订阅' }]}
           options={subscribes.map((s) => ({
             label: (
               <Space>
                 <Typography.Text>{s.name}</Typography.Text>
-                <Tag color={'cyan'}>{DataSizeUtils.formatDiff(s.max, s.used)}</Tag>
+                <Tag color={'cyan'}>{DataSizeUtils.formatDiff(s.max, s.upload + s.download)}</Tag>
                 <Tag color={'magenta'}>{DateTimeUtils.formatDiffEnd(s.expireTime)}</Tag>
                 <Tag color={'geekblue'}>{DateTimeUtils.formatDiffStart(s.updateTime, '前')}</Tag>
               </Space>
@@ -142,25 +142,25 @@ export default ({open, close, vo}: Props) => {
                   name={'directRuleIds'}
                   label={'直接连接规则'}
                   mode="multiple"
-                  fieldProps={{loading: ruleLoading, maxTagCount: 1}}
-                  formItemProps={{style: {flexGrow: 1}}}
+                  fieldProps={{ loading: ruleLoading, maxTagCount: 1 }}
+                  formItemProps={{ style: { flexGrow: 1 } }}
                   options={renderRuleOptions(directRuleIds, selectedRuleIds, rules)}
                 />
                 <ProFormSelect
                   name={'proxyRuleIds'}
                   label={'代理连接规则'}
                   mode="multiple"
-                  fieldProps={{loading: ruleLoading, maxTagCount: 1}}
-                  formItemProps={{style: {flexGrow: 1, marginLeft: '5px'}}}
+                  fieldProps={{ loading: ruleLoading, maxTagCount: 1 }}
+                  formItemProps={{ style: { flexGrow: 1, marginLeft: '5px' } }}
                   options={renderRuleOptions(proxyRuleIds, selectedRuleIds, rules)}
-                  rules={[{required: true, message: '请选择至少一个规则'}]}
+                  rules={[{ required: true, message: '请选择至少一个规则' }]}
                 />
                 <ProFormSelect
                   name={'rejectRuleIds'}
                   label={'拒绝连接规则'}
                   mode="multiple"
-                  fieldProps={{loading: ruleLoading, maxTagCount: 1}}
-                  formItemProps={{style: {flexGrow: 1, marginLeft: '5px'}}}
+                  fieldProps={{ loading: ruleLoading, maxTagCount: 1 }}
+                  formItemProps={{ style: { flexGrow: 1, marginLeft: '5px' } }}
                   options={renderRuleOptions(rejectRuleIds, selectedRuleIds, rules)}
                 />
               </Row>
@@ -168,39 +168,39 @@ export default ({open, close, vo}: Props) => {
           }}
         </ProFormItem>
 
-        <Row justify={'space-between'} style={{flexWrap: 'nowrap'}}>
+        <Row justify={'space-between'} style={{ flexWrap: 'nowrap' }}>
           <ProFormField name={'includeNoArea'} label={'无区域节点'} initialValue={true}>
-            <RadioDict code={'WhetherIncludeDict'} props={{optionType: 'button'}}/>
+            <RadioDict code={'WhetherIncludeDict'} props={{ optionType: 'button' }} />
           </ProFormField>
           <ProFormField
             name={'includeArea'}
             label={'区域配置'}
-            formItemProps={{style: {marginLeft: '5px'}}}
+            formItemProps={{ style: { marginLeft: '5px' } }}
             initialValue={true}
           >
-            <RadioDict code={'WhetherIncludeDict'} props={{optionType: 'button'}}/>
+            <RadioDict code={'WhetherIncludeDict'} props={{ optionType: 'button' }} />
           </ProFormField>
           <ProFormField
             name={'areas'}
             label={'区域'}
-            formItemProps={{style: {flexGrow: 1, marginLeft: '5px'}}}
+            formItemProps={{ style: { flexGrow: 1, marginLeft: '5px' } }}
             extra={'根据区域配置, 排除或包含选中区域的节点.'}
             initialValue={['SG', 'US', 'JP']}
           >
-            <AreaMultipleDict type={'select'} props={{allowClear: true, maxTagCount: 3}}/>
+            <AreaMultipleDict type={'select'} props={{ allowClear: true, maxTagCount: 3 }} />
           </ProFormField>
         </Row>
 
-        <Row justify={'space-between'} style={{flexWrap: 'nowrap'}}>
+        <Row justify={'space-between'} style={{ flexWrap: 'nowrap' }}>
           <ProFormField name={'includeNameKeyword'} label={'名称关键字配置'} initialValue={false}>
-            <RadioDict code={'WhetherIncludeDict'} props={{optionType: 'button'}}/>
+            <RadioDict code={'WhetherIncludeDict'} props={{ optionType: 'button' }} />
           </ProFormField>
 
           <ProFormSelect
             name={'nameKeywords'}
             label={'名称关键字'}
             mode={'tags'}
-            formItemProps={{style: {flexGrow: 1, marginLeft: '5px'}}}
+            formItemProps={{ style: { flexGrow: 1, marginLeft: '5px' } }}
             extra={'根据名称关键字配置, 排除或包含名称中存在关键字的节点'}
             initialValue={['IPLC', '境外', '回国']}
           />
@@ -209,7 +209,7 @@ export default ({open, close, vo}: Props) => {
         <ProFormText
           name={'interval'}
           label={'更新间隔'}
-          rules={[{required: true}]}
+          rules={[{ required: true }]}
           initialValue={'PT10H'}
           extra={
             <Typography.Text type={'secondary'}>
@@ -227,12 +227,12 @@ export default ({open, close, vo}: Props) => {
           }
         />
 
-        <ProFormText name={'count'} hidden={true}/>
-        <ProFormText name={'processCount'} hidden={true}/>
-        <ProFormText name={'domainCount'} hidden={true}/>
-        <ProFormText name={'ipCount'} hidden={true}/>
-        <ProFormText name={'otherCount'} hidden={true}/>
-        <ProFormText name={'updateTime'} hidden={true}/>
+        <ProFormText name={'count'} hidden={true} />
+        <ProFormText name={'processCount'} hidden={true} />
+        <ProFormText name={'domainCount'} hidden={true} />
+        <ProFormText name={'ipCount'} hidden={true} />
+        <ProFormText name={'otherCount'} hidden={true} />
+        <ProFormText name={'updateTime'} hidden={true} />
       </ModalForm>
     </>
   );

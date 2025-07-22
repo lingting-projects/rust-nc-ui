@@ -4,10 +4,11 @@ declare namespace SUBSCRIBE {
     name: string;
     url: string;
     interval: string;
-    used: number;
+    download: number;
+    upload: number;
     max: number;
-    expireTime: string;
-    updateTime: string;
-    createTime: string;
+    expireTime: number;
+    updateTime: number;
+    createTime: number;
   };
 }

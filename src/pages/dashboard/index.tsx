@@ -1,16 +1,16 @@
 import Button from '@/components/Button';
-import {TextDict} from '@/components/Dict';
+import { TextDict } from '@/components/Dict';
 import Icon from '@/components/Icon';
-import {StatisticPair} from '@/components/Statistic';
-import {webConfig, webKernel, webSubscribe} from '@/services/web';
+import { StatisticPair } from '@/components/Statistic';
+import { webConfig, webKernel, webSubscribe } from '@/services/web';
 import DataSizeUtils from '@/util/DataSizeUtils';
 import DateTimeUtils from '@/util/DateTimeUtils';
-import {FooterToolbar} from '@ant-design/pro-components';
-import {Alert, Card, Flex, List, Row, Space, Tag, Typography} from 'antd';
-import {createStyles} from 'antd-style';
-import {useCallback, useEffect, useRef, useState} from 'react';
+import { FooterToolbar } from '@ant-design/pro-components';
+import { Alert, Card, Flex, List, Row, Space, Tag, Typography } from 'antd';
+import { createStyles } from 'antd-style';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
-const useStyles = createStyles(({token}) => {
+const useStyles = createStyles(({ token }) => {
   return {
     selected: {
       boxShadow: `0 4px 8px ${token.colorPrimaryActive}`,
@@ -91,10 +91,10 @@ export default () => {
     <>
       <List
         rowKey="id"
-        grid={{gutter: 16}}
+        grid={{ gutter: 16 }}
         dataSource={configs}
         loading={loading || configLoading || subscribeLoading}
-        style={{marginTop: '20px'}}
+        style={{ marginTop: '20px' }}
         renderItem={(item) => (
           <List.Item key={item.id}>
             <Card
@@ -128,11 +128,11 @@ export default () => {
                 gutter={4}
                 align={'middle'}
                 justify={'space-between'}
-                style={{marginTop: '20px', flexWrap: 'nowrap'}}
+                style={{ marginTop: '20px', flexWrap: 'nowrap' }}
               >
                 <StatisticPair
                   label={'无区域节点'}
-                  value={<TextDict code={'WhetherIncludeDict'} value={item.includeNoArea}/>}
+                  value={<TextDict code={'WhetherIncludeDict'} value={item.includeNoArea} />}
                 />
                 <StatisticPair
                   label={'规则数量'}
@@ -154,11 +154,11 @@ export default () => {
                     gutter={4}
                     align={'middle'}
                     justify={'space-between'}
-                    style={{marginTop: '20px', flexWrap: 'nowrap'}}
+                    style={{ marginTop: '20px', flexWrap: 'nowrap' }}
                   >
                     <StatisticPair
                       label={'剩余流量'}
-                      value={DataSizeUtils.formatDiff(s.max, s.used)}
+                      value={DataSizeUtils.formatDiff(s.max, s.upload + s.download)}
                     />
                     <StatisticPair
                       label={'有效期'}
@@ -183,7 +183,7 @@ export default () => {
               dom = (
                 <Alert
                   showIcon={true}
-                  icon={<Icon type={'Loading3QuartersOutlined'}/>}
+                  icon={<Icon type={'Loading3QuartersOutlined'} />}
                   message={'正在加载中...'}
                   type={'info'}
                 />
@@ -216,7 +216,7 @@ export default () => {
               dom = (
                 <Alert
                   showIcon={true}
-                  icon={<Icon type={'LoadingOutlined'}/>}
+                  icon={<Icon type={'LoadingOutlined'} />}
                   message={'正在安装内核...'}
                   type={'info'}
                 />
@@ -225,17 +225,17 @@ export default () => {
               dom = (
                 <Alert
                   showIcon={true}
-                  icon={<Icon type={'LoadingOutlined'}/>}
+                  icon={<Icon type={'LoadingOutlined'} />}
                   message={'内核启动中...'}
                   type={'info'}
                 />
               );
             } else if (state.stoping) {
-              dom = <Alert message={'正在停止运行...'} type={'warning'}/>;
+              dom = <Alert message={'正在停止运行...'} type={'warning'} />;
             } else if (state.running) {
               dom = (
                 <Space>
-                  <Alert message={'正在运行当前配置...'} type={'info'}/>
+                  <Alert message={'正在运行当前配置...'} type={'info'} />
 
                   {state.ui && (
                     <Typography.Link
@@ -243,7 +243,7 @@ export default () => {
                       target={'_blank'}
                     >
                       管理界面
-                      <Icon type={'ExportOutlined'}/>
+                      <Icon type={'ExportOutlined'} />
                     </Typography.Link>
                   )}
 
@@ -279,7 +279,7 @@ export default () => {
               if (!state.installed) {
                 dom = (
                   <Space>
-                    <Alert showIcon={true} message={'未安装内核...'} type={'warning'}/>
+                    <Alert showIcon={true} message={'未安装内核...'} type={'warning'} />
                     {dom}
                   </Space>
                 );
@@ -290,7 +290,7 @@ export default () => {
               <Flex
                 justify={'center'}
                 align={'center'}
-                style={{width: '100%', padding: '16px 24px'}}
+                style={{ width: '100%', padding: '16px 24px' }}
               >
                 {dom}
               </Flex>

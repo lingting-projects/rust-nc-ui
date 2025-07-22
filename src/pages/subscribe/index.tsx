@@ -1,12 +1,12 @@
 import Button from '@/components/Button';
 import Icon from '@/components/Icon';
-import {StatisticPair} from '@/components/Statistic';
+import { StatisticPair } from '@/components/Statistic';
 import UpsertModal from '@/pages/subscribe/UpsertModal';
-import {webSubscribe} from '@/services/web';
+import { webSubscribe } from '@/services/web';
 import DataSizeUtils from '@/util/DataSizeUtils';
 import DateTimeUtils from '@/util/DateTimeUtils';
-import {Card, List, Popconfirm, Row, Space, Tooltip} from 'antd';
-import {useCallback, useEffect, useState} from 'react';
+import { Card, List, Popconfirm, Row, Space, Tooltip } from 'antd';
+import { useCallback, useEffect, useState } from 'react';
 
 export default () => {
   const [open, setOpen] = useState(false);
@@ -38,9 +38,9 @@ export default () => {
         bordered={false}
         extra={
           <Space>
-            <Button text={'查询'} type={'default'} onClick={reload}/>
-            <Button text={'新增'} type={'primary'} onClick={() => setOpen(true)}/>
-            <Button text={'全部刷新'} type={'link'} onClick={() => refresh()}/>
+            <Button text={'查询'} type={'default'} onClick={reload} />
+            <Button text={'新增'} type={'primary'} onClick={() => setOpen(true)} />
+            <Button text={'全部刷新'} type={'link'} onClick={() => refresh()} />
           </Space>
         }
         styles={{
@@ -53,10 +53,10 @@ export default () => {
 
       <List
         rowKey="id"
-        grid={{gutter: 16}}
+        grid={{ gutter: 16 }}
         dataSource={datasource}
         loading={loading}
-        style={{marginTop: '20px'}}
+        style={{ marginTop: '20px' }}
         renderItem={(item) => (
           <List.Item key={item.id}>
             <Card
@@ -69,7 +69,7 @@ export default () => {
               }}
               actions={[
                 <Tooltip key="reload" title="刷新">
-                  <Icon type={'ReloadOutlined'} onClick={() => refresh(item.id)}/>
+                  <Icon type={'ReloadOutlined'} onClick={() => refresh(item.id)} />
                 </Tooltip>,
                 <Tooltip key="edit" title="编辑">
                   <Icon
@@ -89,22 +89,22 @@ export default () => {
                       webSubscribe.remove(item.id).then(() => reload());
                     }}
                   >
-                    <Icon type={'DeleteOutline'} color={'danger'}/>
+                    <Icon type={'DeleteOutline'} color={'danger'} />
                   </Popconfirm>
                 </Tooltip>,
               ]}
             >
-              <Card.Meta title={item.name}/>
+              <Card.Meta title={item.name} />
 
               <Row
                 gutter={4}
                 align={'middle'}
                 justify={'space-between'}
-                style={{marginTop: '20px', flexWrap: 'nowrap'}}
+                style={{ marginTop: '20px', flexWrap: 'nowrap' }}
               >
                 <StatisticPair
                   label={'剩余流量'}
-                  value={DataSizeUtils.formatDiff(item.max, item.used)}
+                  value={DataSizeUtils.formatDiff(item.max, item.upload + item.download)}
                 />
                 <StatisticPair
                   label={'有效期'}
