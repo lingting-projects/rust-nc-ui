@@ -53,7 +53,6 @@ export default ({
       setV(undefined);
     } else {
       const _v = types[valueType][sourceType](value);
-      console.log(value, valueType, _v, sourceType);
       setV(_v);
     }
   }, [value, sourceType]);

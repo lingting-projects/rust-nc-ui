@@ -10,15 +10,15 @@ const _fixed = 2;
 
 const isInvalid = (v?: DataTimeValue): boolean => {
   if (v === undefined || v === null) {
-    return false;
+    return true;
   }
   if (typeof v === 'string' && v.trim().length < 1) {
-    return false;
+    return true;
   }
-  if (typeof v === 'number' && v < 0) {
-    return false;
+  if (typeof v === 'number' && v <= 0) {
+    return true;
   }
-  return true;
+  return false;
 };
 
 export const toNumber = (v: DataTimeValue, fixed: number = _fixed): number => {

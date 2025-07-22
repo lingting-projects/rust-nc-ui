@@ -166,7 +166,7 @@ export default () => {
                     />
                     <StatisticPair
                       label={'上次更新'}
-                      value={DateTimeUtils.formatDiffStart(s.updateTime, '前')}
+                      value={DateTimeUtils.formatDiffStart(s.refreshTime, '前')}
                     />
                   </Row>
                 ))}

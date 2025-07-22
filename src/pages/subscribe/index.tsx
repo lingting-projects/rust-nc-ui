@@ -112,7 +112,7 @@ export default () => {
                 />
                 <StatisticPair
                   label={'上次更新'}
-                  value={DateTimeUtils.formatDiffStart(item.updateTime, '前')}
+                  value={DateTimeUtils.formatDiffStart(item.refreshTime, '前')}
                 />
               </Row>
             </Card>
@@ -123,12 +123,8 @@ export default () => {
       <UpsertModal
         vo={vo}
         open={open}
-        close={(id) => {
-          if (id) {
-            refresh(id);
-          } else {
-            reload();
-          }
+        close={() => {
+          reload();
           setOpen(false);
           setVo(undefined);
         }}
