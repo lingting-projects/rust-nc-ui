@@ -4,12 +4,12 @@ declare namespace RULE {
     name: string;
     url: string;
     interval: string;
-    count: number;
-    processCount: number;
-    domainCount: number;
-    ipCount: number;
-    otherCount: number;
     updateTime: string;
     createTime: string;
+    refreshTime: string;
+    count: number;
+    countProcess: number;
+    countIp: number;
+    countOther: number;
   };
 }

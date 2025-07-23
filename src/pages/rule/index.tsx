@@ -1,12 +1,11 @@
 import Button from '@/components/Button';
 import Icon from '@/components/Icon';
-import {StatisticPair} from '@/components/Statistic';
-import UpsertModal from './UpsertModal';
-import {webRule} from '@/services/web';
-import DataSizeUtils from '@/util/DataSizeUtils';
+import { StatisticPair } from '@/components/Statistic';
+import { webRule } from '@/services/web';
 import DateTimeUtils from '@/util/DateTimeUtils';
-import {Card, List, Popconfirm, Row, Space, Tooltip} from 'antd';
-import {useCallback, useEffect, useState} from 'react';
+import { Card, List, Popconfirm, Row, Space, Tooltip } from 'antd';
+import { useCallback, useEffect, useState } from 'react';
+import UpsertModal from './UpsertModal';
 
 export default () => {
   const [open, setOpen] = useState(false);
@@ -38,9 +37,9 @@ export default () => {
         bordered={false}
         extra={
           <Space>
-            <Button text={'查询'} type={'default'} onClick={reload}/>
-            <Button text={'新增'} type={'primary'} onClick={() => setOpen(true)}/>
-            <Button text={'全部刷新'} type={'link'} onClick={() => refresh()}/>
+            <Button text={'查询'} type={'default'} onClick={reload} />
+            <Button text={'新增'} type={'primary'} onClick={() => setOpen(true)} />
+            <Button text={'全部刷新'} type={'link'} onClick={() => refresh()} />
           </Space>
         }
         styles={{
@@ -53,10 +52,10 @@ export default () => {
 
       <List
         rowKey="id"
-        grid={{gutter: 16}}
+        grid={{ gutter: 16 }}
         dataSource={datasource}
         loading={loading}
-        style={{marginTop: '20px'}}
+        style={{ marginTop: '20px' }}
         renderItem={(item) => (
           <List.Item key={item.id}>
             <Card
@@ -69,7 +68,7 @@ export default () => {
               }}
               actions={[
                 <Tooltip key="reload" title="刷新">
-                  <Icon type={'ReloadOutlined'} onClick={() => refresh(item.id)}/>
+                  <Icon type={'ReloadOutlined'} onClick={() => refresh(item.id)} />
                 </Tooltip>,
                 <Tooltip key="edit" title="编辑">
                   <Icon
@@ -89,26 +88,23 @@ export default () => {
                       webRule.remove(item.id).then(() => reload());
                     }}
                   >
-                    <Icon type={'DeleteOutline'} color={'danger'}/>
+                    <Icon type={'DeleteOutline'} color={'danger'} />
                   </Popconfirm>
                 </Tooltip>,
               ]}
             >
-              <Card.Meta title={item.name}/>
+              <Card.Meta title={item.name} />
 
               <Row
                 gutter={4}
                 align={'middle'}
                 justify={'space-between'}
-                style={{marginTop: '20px', flexWrap: 'nowrap'}}
+                style={{ marginTop: '20px', flexWrap: 'nowrap' }}
               >
-                <StatisticPair
-                  label={'规则数量'}
-                  value={item.count}
-                />
+                <StatisticPair label={'规则数量'} value={item.count} />
                 <StatisticPair
                   label={'上次更新'}
-                  value={DateTimeUtils.formatDiffStart(item.updateTime, '前')}
+                  value={DateTimeUtils.formatDiffStart(item.refreshTime, '前')}
                 />
               </Row>
             </Card>
@@ -119,12 +115,8 @@ export default () => {
       <UpsertModal
         vo={vo}
         open={open}
-        close={(id) => {
-          if (id) {
-            refresh(id);
-          } else {
-            reload();
-          }
+        close={() => {
+          reload();
           setOpen(false);
           setVo(undefined);
         }}

@@ -50,12 +50,6 @@ export default ({ open, close, vo }: Props) => {
         >
           <TimeDuration defaultSourceType={'hours'} />
         </ProFormField>
-
-        <ProFormText name={'upload'} hidden={true} />
-        <ProFormText name={'download'} hidden={true} />
-        <ProFormText name={'max'} hidden={true} />
-        <ProFormText name={'expireTime'} hidden={true} />
-        <ProFormText name={'updateTime'} hidden={true} />
       </ModalForm>
     </>
   );
