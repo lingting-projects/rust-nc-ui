@@ -1,7 +1,7 @@
 import request from '.';
 
 export const get = async () => {
-  return request.get<SETTINGS.SettingsVO>('settings/get');
+  return request.get<SETTINGS.Settings>('settings/get');
 };
 
 export const upsert = async (t: SETTINGS.Settings) => {

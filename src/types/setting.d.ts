@@ -1,24 +1,27 @@
 declare namespace SETTINGS {
-  type Settings = {
-    id: string;
-    githubFast: string;
-    singUi: string;
-    singMixListen: string;
-    singMixPort: number;
-    testUrl: string;
-    geoCnIpUrl: string;
-    cnDnsArray: string[];
-    proxyDnsArray: string[];
-    runOnStarted: boolean;
-    updateTime: string;
-    createTime: string;
+  type Kernel = {
+    singBoxVersion: string;
+    ui: string;
+    mixedListen: string;
+    mixedPort: u16;
+    dnsCn: Vec<string>;
+    dnsProxy: Vec<string>;
   };
-  type SettingsVO = Settings & {
-    singVersion: string;
+  type Software = {
     startup: boolean;
     minimize: boolean;
     version: string;
-    activeProfiles: string[];
+    fastGithub: string;
+    testUrl: string;
+  };
+  type Run = {
+    auto: boolean;
+    selected: Option<string>;
+  };
+  type Settings = {
+    kernel: Kernel;
+    software: Software;
+    run: Run;
   };
   type AppUpdater = {
     checking: boolean;
