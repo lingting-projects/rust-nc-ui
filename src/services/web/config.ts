@@ -9,9 +9,11 @@ export const upsert = async (t: CONFIG.Config) => {
 };
 
 export const refresh = async (id?: string) => {
-  return request.patch('config/refresh', id ? {id} : {});
+  return request.patch('config/refresh', id ? { id } : {});
 };
 
 export const remove = async (id?: string) => {
-  return request.post('config/delete', id ? {id} : {});
+  return request.post('config/delete', id ? { id } : {});
 };
+
+export const initialValue = async () => request.get<Partial<CONFIG.Config>>('config/default');

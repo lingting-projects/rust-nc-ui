@@ -132,12 +132,12 @@ export default () => {
               >
                 <StatisticPair
                   label={'无区域节点'}
-                  value={<TextDict code={'WhetherIncludeDict'} value={item.includeNoArea} />}
+                  value={<TextDict code={'WhetherIncludeDict'} value={item.includeAreaNon} />}
                 />
                 <StatisticPair
                   label={'规则数量'}
                   value={
-                    item.directRuleIds.length + item.proxyRuleIds.length + item.rejectRuleIds.length
+                    item.ruleDirectIds.length + item.ruleProxyIds.length + item.ruleRejectIds.length
                   }
                 />
                 <StatisticPair

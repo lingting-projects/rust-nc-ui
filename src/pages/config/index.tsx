@@ -1,11 +1,11 @@
 import Button from '@/components/Button';
-import {TextDict} from '@/components/Dict';
+import { TextDict } from '@/components/Dict';
 import Icon from '@/components/Icon';
-import {StatisticPair} from '@/components/Statistic';
-import {webConfig} from '@/services/web';
+import { StatisticPair } from '@/components/Statistic';
+import { webConfig } from '@/services/web';
 import DateTimeUtils from '@/util/DateTimeUtils';
-import {Card, List, Popconfirm, Row, Space, Tag, Tooltip, Typography} from 'antd';
-import {useCallback, useEffect, useState} from 'react';
+import { Card, List, Popconfirm, Row, Space, Tag, Tooltip, Typography } from 'antd';
+import { useCallback, useEffect, useState } from 'react';
 import UpsertModal from './UpsertModal';
 
 export default () => {
@@ -38,9 +38,9 @@ export default () => {
         bordered={false}
         extra={
           <Space>
-            <Button text={'查询'} type={'default'} onClick={reload}/>
-            <Button text={'新增'} type={'primary'} onClick={() => setOpen(true)}/>
-            <Button text={'全部刷新'} type={'link'} onClick={() => refresh()}/>
+            <Button text={'查询'} type={'default'} onClick={reload} />
+            <Button text={'新增'} type={'primary'} onClick={() => setOpen(true)} />
+            <Button text={'全部刷新'} type={'link'} onClick={() => refresh()} />
           </Space>
         }
         styles={{
@@ -53,10 +53,10 @@ export default () => {
 
       <List
         rowKey="id"
-        grid={{gutter: 16}}
+        grid={{ gutter: 16 }}
         dataSource={datasource}
         loading={loading}
-        style={{marginTop: '20px'}}
+        style={{ marginTop: '20px' }}
         renderItem={(item) => (
           <List.Item key={item.id}>
             <Card
@@ -69,7 +69,7 @@ export default () => {
               }}
               actions={[
                 <Tooltip key="reload" title="刷新">
-                  <Icon type={'ReloadOutlined'} onClick={() => refresh(item.id)}/>
+                  <Icon type={'ReloadOutlined'} onClick={() => refresh(item.id)} />
                 </Tooltip>,
                 <Tooltip key="edit" title="编辑">
                   <Icon
@@ -82,14 +82,14 @@ export default () => {
                 </Tooltip>,
                 <Tooltip title="删除" key="delete">
                   <Popconfirm
-                    title={'确定删除此规则吗?'}
+                    title={'确定删除此配置吗?'}
                     okText={'确定'}
                     cancelText={'取消'}
                     onConfirm={() => {
                       webConfig.remove(item.id).then(() => reload());
                     }}
                   >
-                    <Icon type={'DeleteOutline'} color={'danger'}/>
+                    <Icon type={'DeleteOutline'} color={'danger'} />
                   </Popconfirm>
                 </Tooltip>,
               ]}
@@ -109,21 +109,21 @@ export default () => {
                 gutter={4}
                 align={'middle'}
                 justify={'space-between'}
-                style={{marginTop: '20px', flexWrap: 'nowrap'}}
+                style={{ marginTop: '20px', flexWrap: 'nowrap' }}
               >
                 <StatisticPair
                   label={'无区域节点'}
-                  value={<TextDict code={'WhetherIncludeDict'} value={item.includeNoArea}/>}
+                  value={<TextDict code={'WhetherIncludeDict'} value={item.includeAreaNon} />}
                 />
                 <StatisticPair
-                  label={'规则数量'}
+                  label={'配置数量'}
                   value={
-                    item.directRuleIds.length + item.proxyRuleIds.length + item.rejectRuleIds.length
+                    item.ruleDirectIds.length + item.ruleProxyIds.length + item.ruleRejectIds.length
                   }
                 />
                 <StatisticPair
                   label={'上次更新'}
-                  value={DateTimeUtils.formatDiffStart(item.updateTime, '前')}
+                  value={DateTimeUtils.formatDiffStart(item.refreshTime, '前')}
                 />
               </Row>
             </Card>
