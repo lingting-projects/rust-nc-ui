@@ -19,7 +19,7 @@ const useStyles = createStyles(({ token }) => {
 });
 
 export default () => {
-  const {styles} = useStyles();
+  const { styles } = useStyles();
 
   const [loading, setLoading] = useState(false);
   const [selected, setSelected] = useState<string>();
@@ -107,7 +107,7 @@ export default () => {
                 },
               }}
               onClick={() => {
-                if (state?.running || state?.starting) {
+                if (state?.running) {
                   return;
                 }
                 setSelected(item.id);
@@ -188,50 +188,6 @@ export default () => {
                   type={'info'}
                 />
               );
-            } else if (state.error) {
-              dom = (
-                <Space>
-                  <Alert
-                    showIcon={true}
-                    message={`${state.reason || '出现未知异常.'} ${
-                      state.reboot ? '可以尝试重启程序!' : '可以尝试重新启动!'
-                    }`}
-                    type={'error'}
-                  />
-
-                  <Button
-                    text={'重新启动'}
-                    type={'primary'}
-                    loading={loading}
-                    onClick={() => {
-                      setLoading(true);
-                      webKernel.run(selected).finally(() => {
-                        reloadState().finally(() => setLoading(false));
-                      });
-                    }}
-                  />
-                </Space>
-              );
-            } else if (state.installing) {
-              dom = (
-                <Alert
-                  showIcon={true}
-                  icon={<Icon type={'LoadingOutlined'} />}
-                  message={'正在安装内核...'}
-                  type={'info'}
-                />
-              );
-            } else if (state.starting) {
-              dom = (
-                <Alert
-                  showIcon={true}
-                  icon={<Icon type={'LoadingOutlined'} />}
-                  message={'内核启动中...'}
-                  type={'info'}
-                />
-              );
-            } else if (state.stoping) {
-              dom = <Alert message={'正在停止运行...'} type={'warning'} />;
             } else if (state.running) {
               dom = (
                 <Space>
@@ -270,20 +226,12 @@ export default () => {
                   loading={loading}
                   onClick={() => {
                     setLoading(true);
-                    webKernel.run(selected).finally(() => {
+                    webKernel.start(selected).finally(() => {
                       reloadState().finally(() => setLoading(false));
                     });
                   }}
                 />
               );
-              if (!state.installed) {
-                dom = (
-                  <Space>
-                    <Alert showIcon={true} message={'未安装内核...'} type={'warning'} />
-                    {dom}
-                  </Space>
-                );
-              }
             }
 
             return (

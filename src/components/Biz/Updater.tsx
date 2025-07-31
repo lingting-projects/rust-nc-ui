@@ -45,7 +45,7 @@ export default () => {
 
   return (
     <Modal
-      open={open && (updater?.hasNew || updater?.error)}
+      open={open && (updater?.new || updater?.error)}
       maskClosable={false}
       title={'检测到新版本'}
       okButtonProps={{ loading, disabled: updater?.installed }}

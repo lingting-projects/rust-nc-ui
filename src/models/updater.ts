@@ -1,5 +1,5 @@
-import {webSettings} from '@/services/web';
-import {useCallback, useEffect, useRef, useState} from 'react';
+import { webSettings } from '@/services/web';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 export default () => {
   const stateRef = useRef(false);
@@ -21,7 +21,7 @@ export default () => {
           refreshState().finally(() => setLoading(false));
           return;
         }
-        setUpdater({hasNew: v});
+        setUpdater({ new: v });
         setLoading(false);
       })
       .catch(() => setLoading(false));
@@ -50,5 +50,5 @@ export default () => {
     };
   }, []);
 
-  return {open, setOpen, updater, loading, setLoading, stateRef, refresh, refreshState};
+  return { open, setOpen, updater, loading, setLoading, stateRef, refresh, refreshState };
 };
