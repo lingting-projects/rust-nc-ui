@@ -6,7 +6,7 @@ import { webConfig, webKernel, webSubscribe } from '@/services/web';
 import DataSizeUtils from '@/util/DataSizeUtils';
 import DateTimeUtils from '@/util/DateTimeUtils';
 import { FooterToolbar } from '@ant-design/pro-components';
-import { Alert, Card, Flex, List, Row, Space, Tag, Typography } from 'antd';
+import { Alert, Card, Flex, List, Row, Space, Tag, Tooltip, Typography } from 'antd';
 import { createStyles } from 'antd-style';
 import { useCallback, useEffect, useRef, useState } from 'react';
 
@@ -219,9 +219,23 @@ export default () => {
                 </Space>
               );
             } else {
-              dom = (
+              const doms = [];
+              if (state.error) {
+                doms.push(
+                  <Tooltip key={'tooltip'} title={state.reason}>
+                    <Icon
+                      type={'ExclamationCircleTwoTone'}
+                      twoToneColor={'#eb2f96'}
+                      style={{ marginRight: '5px' }}
+                    />
+                  </Tooltip>,
+                );
+              }
+
+              doms.push(
                 <Button
-                  text={'启动'}
+                  key={'btn_start'}
+                  text={state.error && selected === state.configId ? '重新启动' : '启动'}
                   type={'primary'}
                   loading={loading}
                   onClick={() => {
@@ -230,8 +244,9 @@ export default () => {
                       reloadState().finally(() => setLoading(false));
                     });
                   }}
-                />
+                />,
               );
+              dom = doms;
             }
 
             return (

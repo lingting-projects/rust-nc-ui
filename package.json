@@ -6,9 +6,9 @@
   "scripts": {
     "analyze": "cross-env ANALYZE=1 max build",
     "build": "npm run build:dev",
-    "build:dev": "cross-env NODE_OPTIONS=--openssl-legacy-provider max build",
+    "build:dev": "cross-env NODE_OPTIONS=--openssl-legacy-provider relative=true max build",
     "build:relative": "cross-env NODE_OPTIONS=--openssl-legacy-provider relative=true max build",
-    "build:prod": "cross-env NODE_OPTIONS=--openssl-legacy-provider REACT_APP_ENV=prod UMI_ENV=prod max build",
+    "build:prod": "cross-env NODE_OPTIONS=--openssl-legacy-provider REACT_APP_ENV=prod relative=true UMI_ENV=prod max build",
     "deploy": "npm run build && npm run gh-pages",
     "dev": "npm run start:dev",
     "gh-pages": "gh-pages -d dist",
