@@ -145,7 +145,7 @@ export default ({ open, close, vo }: Props) => {
                 <Typography.Text>{s.name}</Typography.Text>
                 <Tag color={'cyan'}>{DataSizeUtils.formatDiff(s.max, s.upload + s.download)}</Tag>
                 <Tag color={'magenta'}>{DateTimeUtils.formatDiffEnd(s.expireTime)}</Tag>
-                <Tag color={'geekblue'}>{DateTimeUtils.formatDiffStart(s.updateTime, '前')}</Tag>
+                <Tag color={'geekblue'}>{DateTimeUtils.formatDiffStart(s.refreshTime, '前')}</Tag>
               </Space>
             ),
             value: s.id,
