@@ -1,12 +1,12 @@
 // https://umijs.org/config/
-import {IConfigFromPlugins} from '@@/core/pluginConfig';
-import {defineConfig} from '@umijs/max';
-import type {IConfig} from '@umijs/preset-umi';
+import { IConfigFromPlugins } from '@@/core/pluginConfig';
+import { defineConfig } from '@umijs/max';
+import type { IConfig } from '@umijs/preset-umi';
 import proxy from './proxy';
 import routes from './routes';
 import settings from './settings';
 
-const {REACT_APP_ENV = 'dev', relative = false} = process.env;
+const { REACT_APP_ENV = 'dev', relative = false } = process.env;
 
 const envConfig: Partial<IConfigFromPlugins & IConfig> = {
   publicPath: '/',
@@ -33,8 +33,8 @@ export default defineConfig({
    * @doc https://umijs.org/docs/api/config#hash
    */
   hash: true,
-  history: {type: settings.historyType},
-  favicons: [`${envConfig.publicPath}32x32.png`],
+  history: { type: settings.historyType },
+  favicons: [],
   /**
    * @name 兼容性设置
    * @description 设置 ie11 不一定完美兼容，需要检查自己使用的所有依赖
@@ -137,7 +137,7 @@ export default defineConfig({
    */
   headScripts: [
     // 解决首次加载时白屏的问题
-    {src: `${envConfig.publicPath}scripts/loading.js`, async: true},
+    { src: `${envConfig.publicPath}scripts/loading.js`, async: true },
   ],
   //================ pro 插件配置 =================
   presets: ['umi-presets-pro'],
