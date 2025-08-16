@@ -12,4 +12,4 @@ export const updaterCheck = async () => request.post<boolean>('settings/update/c
 
 export const updaterInstall = async () => request.post<boolean>('settings/update/install');
 
-export const updaterState = async () => request.get<SETTINGS.AppUpdater>('settings/state');
+export const updaterState = async () => request.get<SETTINGS.AppUpdater>('settings/update/state');

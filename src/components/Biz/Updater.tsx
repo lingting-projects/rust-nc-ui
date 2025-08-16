@@ -39,7 +39,9 @@ export default () => {
       setLoading(true);
     } else {
       setType('info');
-      setMessage('存在新版本, 是否进行更新!');
+      setMessage(
+        `检测到新版本[${updater?.newVersion}], 是否进行更新?\n需下载文件大小: ${updater?.newSize}`,
+      );
     }
   }, [updater]);
 

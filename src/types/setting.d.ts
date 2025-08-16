@@ -26,6 +26,9 @@ declare namespace SETTINGS {
   type AppUpdater = {
     checking: boolean;
     new: boolean;
+    newVersion: string;
+    newUrl: string;
+    newSize: string;
     downloading: boolean;
     unzipping: boolean;
     installing: boolean;

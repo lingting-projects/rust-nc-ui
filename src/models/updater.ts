@@ -9,7 +9,16 @@ export default () => {
   const [updater, setUpdater] = useState<Partial<SETTINGS.AppUpdater>>();
   const [loading, setLoading] = useState(false);
 
-  const refreshState = useCallback(() => webSettings.updaterState().then((v) => setUpdater(v)), []);
+  const refreshState = useCallback(
+    () =>
+      webSettings.updaterState().then((v) => {
+        setUpdater(v);
+        if (!v.new) {
+          stateRef.current = false;
+        }
+      }),
+    [],
+  );
 
   const refresh = useCallback(() => {
     setLoading(true);
