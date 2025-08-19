@@ -1,9 +1,11 @@
+import DocumentUtils from '@/util/DocumentUtils';
 import { DiffEditorProps, EditorProps, loader } from '@monaco-editor/react';
 import { editor } from 'monaco-editor';
 import { MutableRefObject } from 'react';
 
 export const resetConfig = () => {
-  loader.config({ paths: { vs: `${window.location.origin}/vs` } });
+  let root = DocumentUtils.root();
+  loader.config({ paths: { vs: `${root}/vs` } });
 };
 
 export type MonacoEditorAction = {

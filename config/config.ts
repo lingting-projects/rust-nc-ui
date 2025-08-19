@@ -24,6 +24,7 @@ export default defineConfig({
       kmp: false,
       msg: '默认环境配置',
       requestPrefix: '/api',
+      publicPath: envConfig.publicPath,
       ...(envConfig.define ? envConfig.define['process.env'] : {}),
     },
   },

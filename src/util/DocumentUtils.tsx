@@ -1,11 +1,27 @@
-import {Store} from '@/holder/Store';
-import {AUTH_PARAMS} from '@/models/context';
-import {XWindow} from '@/typings';
-import {isArray} from 'lodash';
+import { Store } from '@/holder/Store';
+import { AUTH_PARAMS } from '@/models/context';
+import { XWindow } from '@/typings';
+import { isArray } from 'lodash';
 
 export const xw = window as XWindow;
 
 export default {
+  /**
+   * 页面根路径
+   * http://localhost:30000/#/rule -> http://localhost:30000
+   * http://localhost:30000/rule -> http://localhost:30000
+   * file:///C:/Program%20Files%20(x86)/lingting/lingting-nc/ui/index.html#/rule -> file:///C:/Program%20Files%20(x86)/lingting/lingting-nc
+   */
+  root() {
+    const location = window.location;
+    const origin = location.origin;
+    if (origin.startsWith('http')) {
+      return origin;
+    }
+    const pathname = location.pathname;
+    const path = pathname.substring(0, pathname.lastIndexOf('/'));
+    return `${origin}${path}`;
+  },
   encode(source?: any) {
     if (source === null || source === undefined) {
       return '';
@@ -56,8 +72,7 @@ export default {
     if (uri.startsWith('http')) {
       return this.joinUrlParams(uri, joinParams);
     }
-    const location = window.location;
-    let url = `${location.protocol}//${location.host}`;
+    let url = this.root();
     if (!uri.startsWith('/')) {
       url += '/';
     }
