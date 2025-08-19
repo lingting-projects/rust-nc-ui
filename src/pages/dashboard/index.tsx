@@ -64,13 +64,13 @@ export default () => {
   }, []);
 
   const timerRef = useRef<NodeJS.Timeout | null>(null);
-  const isMountedRef = useRef(true);
+  const autoReloadState = useRef(true);
 
   useEffect(() => {
     // 定时拉取 state
     const fetch = () => {
       reloadState().finally(() => {
-        if (isMountedRef.current) {
+        if (autoReloadState.current) {
           timerRef.current = setTimeout(fetch, 1000);
         }
       });
@@ -80,7 +80,7 @@ export default () => {
     fetch();
 
     return () => {
-      isMountedRef.current = false;
+      autoReloadState.current = false;
       if (timerRef.current) {
         clearTimeout(timerRef.current);
       }
@@ -213,8 +213,12 @@ export default () => {
                     loading={loading}
                     onClick={() => {
                       setLoading(true);
+                      autoReloadState.current = false;
                       webKernel.stop(selected).finally(() => {
-                        reloadState().finally(() => setLoading(false));
+                        reloadState().finally(() => {
+                          setLoading(false);
+                          autoReloadState.current = true;
+                        });
                       });
                     }}
                   />
@@ -242,8 +246,12 @@ export default () => {
                   loading={loading}
                   onClick={() => {
                     setLoading(true);
+                    autoReloadState.current = false;
                     webKernel.start(selected).finally(() => {
-                      reloadState().finally(() => setLoading(false));
+                      reloadState().finally(() => {
+                        setLoading(false);
+                        autoReloadState.current = true;
+                      });
                     });
                   }}
                 />,
