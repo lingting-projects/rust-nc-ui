@@ -69,10 +69,13 @@ export default () => {
   useEffect(() => {
     // 定时拉取 state
     const fetch = () => {
+      let reload = autoReloadState.current;
+      if (!reload) {
+        timerRef.current = setTimeout(fetch, 300);
+        return;
+      }
       reloadState().finally(() => {
-        if (autoReloadState.current) {
-          timerRef.current = setTimeout(fetch, 1000);
-        }
+        timerRef.current = setTimeout(fetch, 1000);
       });
     };
 
