@@ -9,5 +9,9 @@ export const start = async (id: string) => {
 };
 
 export const stop = async (id: string) => {
-  return request.post('kernel/stop', {id});
+  return request.post('kernel/stop', { id });
+};
+
+export const open = async () => {
+  return request.post('kernel/open');
 };

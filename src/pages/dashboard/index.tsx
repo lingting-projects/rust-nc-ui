@@ -195,8 +195,10 @@ export default () => {
 
                   {state.ui && (
                     <Typography.Link
-                      href={state.ui.startsWith('http') ? state.ui : `http://${state.ui}`}
-                      target={'_blank'}
+                      onClick={() => {
+                        setLoading(true);
+                        webKernel.open().finally(() => setLoading(false));
+                      }}
                     >
                       管理界面
                       <Icon type={'ExportOutlined'} />
