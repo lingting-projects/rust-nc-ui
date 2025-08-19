@@ -1,8 +1,10 @@
-import {DiffEditorProps, EditorProps} from '@monaco-editor/react';
-import {editor} from 'monaco-editor';
-import {MutableRefObject} from 'react';
+import { DiffEditorProps, EditorProps } from '@monaco-editor/react';
+import { editor } from 'monaco-editor';
+import { MutableRefObject } from 'react';
 
-export const mergeLoaderConfig = () => ({paths: {vs: `${window.location.origin}/vs`}});
+export const mergeLoaderConfig = () => {
+  return { paths: { vs: `${window.location.origin}/vs` } };
+};
 
 export type MonacoEditorAction = {
   editor?: editor.IStandaloneCodeEditor;
