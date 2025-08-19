@@ -23,10 +23,4 @@ export type XWindow = typeof window & {
   logoutShow?: boolean;
   queryToken?: boolean;
   setRequestPrefix?: (target?: string) => void;
-  kmp: (params: {
-    request: string;
-    persistent: boolean;
-    onSuccess: (value: string) => void;
-    onFailure: (code: number, message: string) => void;
-  }) => void;
 };

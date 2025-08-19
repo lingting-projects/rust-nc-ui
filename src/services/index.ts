@@ -1,7 +1,6 @@
-import {request as kmp} from '@/kmp';
-import {R} from '@/types/global';
-import {request as axios} from '@@/exports';
-import {AxiosRequestConfig} from 'axios';
+import { R } from '@/types/global';
+import { request as axios } from '@@/exports';
+import { AxiosRequestConfig } from 'axios';
 
 export type Options = Omit<AxiosRequestConfig, 'params' | 'data' | 'url'> & {
   skipErrorHandler?: boolean;
@@ -49,7 +48,7 @@ export class Request {
       data,
     };
 
-    const r = await (process.env?.kmp ? kmp<T>(target, config) : axios<R<T>>(target, config));
+    const r = await axios<R<T>>(target, config);
     return r.data;
   };
 
