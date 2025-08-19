@@ -1,16 +1,10 @@
-import {PageLoading} from '@ant-design/pro-layout';
-import Editor, {loader, Monaco} from '@monaco-editor/react';
-import {editor} from 'monaco-editor';
-import {useCallback, useEffect, useImperativeHandle, useMemo, useRef} from 'react';
-import {
-  defaultGetOptions,
-  defaultOptions,
-  mergeLoaderConfig,
-  mergeOptions,
-  MonacoEditorProps,
-} from './typings';
+import { PageLoading } from '@ant-design/pro-layout';
+import Editor, { Monaco } from '@monaco-editor/react';
+import { editor } from 'monaco-editor';
+import { useCallback, useEffect, useImperativeHandle, useMemo, useRef } from 'react';
+import { defaultGetOptions, defaultOptions, mergeOptions, MonacoEditorProps } from './typings';
 
-export default ({language, options, onChange, action, onMount, ...props}: MonacoEditorProps) => {
+export default ({ language, options, onChange, action, onMount, ...props }: MonacoEditorProps) => {
   const ref = useRef<editor.IStandaloneCodeEditor>();
 
   const editorOptions = useMemo(() => mergeOptions(defaultOptions, options), [options]);
@@ -36,16 +30,12 @@ export default ({language, options, onChange, action, onMount, ...props}: Monaco
     [onMount],
   );
 
-  useEffect(() => {
-    loader.config(mergeLoaderConfig());
-  }, []);
-
   useImperativeHandle(
     action,
     () => ({
       editor: ref.current,
       getValue: (po) => {
-        const options = {...defaultGetOptions, ...po};
+        const options = { ...defaultGetOptions, ...po };
         return ref.current?.getValue(options) || '';
       },
       setValue: (value) => ref.current?.setValue(value),
@@ -59,7 +49,7 @@ export default ({language, options, onChange, action, onMount, ...props}: Monaco
 
   return (
     <Editor
-      loading={<PageLoading/>}
+      loading={<PageLoading />}
       theme="light"
       {...props}
       options={editorOptions}
