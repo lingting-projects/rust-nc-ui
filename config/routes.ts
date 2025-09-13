@@ -1,5 +1,5 @@
-﻿import {IconKeys} from '@/components/Icon';
-import {Permissions} from '@/types/global';
+﻿import { IconKeys } from '@/components/Icon';
+import { Permissions } from '@/types/global';
 
 /**
  * @name umi 的路由配置
@@ -63,6 +63,10 @@ const routes: Route[] = [
         name: 'settings',
         icon: 'SettingOutlined',
         component: './settings',
+      },
+      {
+        path: '/hidden',
+        component: './Hidden',
       },
       {
         path: '*',
