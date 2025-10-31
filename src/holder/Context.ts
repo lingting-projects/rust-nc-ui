@@ -1,9 +1,7 @@
-import {I18n} from '@/holder/I18n';
-import {xw} from '@/util/DocumentUtils';
-import {history} from '@@/core/history';
-import {stringify} from 'querystring';
-
-export const isDev = process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'dev';
+import { I18n } from '@/holder/I18n';
+import { xw } from '@/util/DocumentUtils';
+import { history } from '@@/core/history';
+import { stringify } from 'querystring';
 
 export const loginPath = '/user/login';
 

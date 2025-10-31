@@ -1,4 +1,5 @@
 import { webSettings } from '@/services/web';
+import EnvUtils from '@/util/EnvUtils';
 import { useModel } from '@umijs/max';
 import { Alert, Modal } from 'antd';
 import { useEffect, useState } from 'react';
@@ -11,7 +12,9 @@ export default () => {
   const [message, setMessage] = useState('');
 
   useEffect(() => {
-    refresh();
+    if (EnvUtils.isProd) {
+      refresh();
+    }
   }, []);
 
   useEffect(() => {

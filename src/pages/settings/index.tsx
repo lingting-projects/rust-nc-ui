@@ -96,13 +96,13 @@ export default () => {
             <ProFormSelect
               name={['kernel', 'dnsCn']}
               label={'中国分流DNS'}
-              fieldProps={{ mode: 'tags', maxTagCount: 3 }}
+              fieldProps={{ mode: 'tags', maxTagCount: 2 }}
             />
 
             <ProFormSelect
               name={['kernel', 'dnsProxy']}
               label={'代理分流DNS'}
-              fieldProps={{ mode: 'tags', maxTagCount: 3 }}
+              fieldProps={{ mode: 'tags', maxTagCount: 2 }}
             />
             <ProFormText
               name={['kernel', 'singBoxVersion']}
