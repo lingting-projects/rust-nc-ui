@@ -1,8 +1,8 @@
-import Dict, {CheckboxDictProps, DictProps, SelectDictProps} from '@/components/Dict';
-import {SingleDictProps} from '@/components/Dict/dict';
-import {I18n} from '@/holder/I18n';
-import {Space, Typography} from 'antd';
-import React, {useMemo} from 'react';
+import Dict, { CheckboxDictProps, DictProps, SelectDictProps } from '@/components/Dict';
+import { SingleDictProps } from '@/components/Dict/dict';
+import { I18n } from '@/holder/I18n';
+import { Space, Typography } from 'antd';
+import React, { useMemo } from 'react';
 import countries from './countries';
 import './index.css';
 
@@ -15,6 +15,7 @@ export type Area = {
   code: AreaCode;
   dialCode: string;
   phoneFormat: string;
+  flagCode?: string;
 };
 
 export type AreaLabelProps = {
@@ -24,13 +25,16 @@ export type AreaLabelProps = {
   local?: boolean;
 };
 
-export const AreaLabel = ({area, flag = true, dial, local}: AreaLabelProps) => {
+export const AreaLabel = ({ area, flag = true, dial, local }: AreaLabelProps) => {
   const name = useMemo(() => (I18n.isChina() ? area.name : area.enName), [area]);
   const array = useMemo(() => {
     const r: React.ReactNode[] = [];
     if (flag) {
       r.push(
-        <div key={`area-flag-${area.code}`} className={`iti-flag ${area.code.toLowerCase()}`}/>,
+        <div
+          key={`area-flag-${area.code}`}
+          className={`iti-flag ${(area.flagCode || area.code).toLowerCase()}`}
+        />,
       );
     }
     if (dial) {
@@ -52,10 +56,10 @@ export type AreaDictProps = Omit<DictProps, 'code' | 'render' | 'labelProps'> & 
 
 export type AreaSingleDictProps = AreaDictProps &
   Omit<SingleDictProps<string>, 'code' | 'render'> & {
-  type: 'radio' | 'tag' | 'text';
-};
+    type: 'radio' | 'tag' | 'text';
+  };
 
-export const AreaSingleDict = ({type, ...props}: AreaSingleDictProps) => {
+export const AreaSingleDict = ({ type, ...props }: AreaSingleDictProps) => {
   const Component = useMemo(() => {
     if (type === 'radio') {
       return Dict.Radio;
@@ -66,16 +70,16 @@ export const AreaSingleDict = ({type, ...props}: AreaSingleDictProps) => {
     return Dict.Text;
   }, [type]);
 
-  return <Component {...props} code={'AreaDict'}/>;
+  return <Component {...props} code={'AreaDict'} />;
 };
 
 export type AreaMultipleDictProps = AreaDictProps &
   Omit<SingleDictProps<string>, 'code' | 'render'> & {
-  type: 'checkbox' | 'select';
-} & Pick<CheckboxDictProps, 'props'> &
+    type: 'checkbox' | 'select';
+  } & Pick<CheckboxDictProps, 'props'> &
   Pick<SelectDictProps, 'props'>;
 
-export const AreaMultipleDict = ({type, ...props}: AreaMultipleDictProps) => {
+export const AreaMultipleDict = ({ type, ...props }: AreaMultipleDictProps) => {
   const Component = useMemo(() => {
     if (type === 'checkbox') {
       return Dict.CheckBox;
@@ -87,9 +91,9 @@ export const AreaMultipleDict = ({type, ...props}: AreaMultipleDictProps) => {
     if (type === 'checkbox') {
       return {};
     }
-    return {mode: 'multiple'};
+    return { mode: 'multiple' };
   }, [type]);
 
   // @ts-ignore
-  return <Component {...props} props={{...props?.props, ...innerProps}} code={'AreaDict'}/>;
+  return <Component {...props} props={{ ...props?.props, ...innerProps }} code={'AreaDict'} />;
 };

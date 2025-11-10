@@ -585,10 +585,10 @@ const countries = {
   },
   MO: {
     enName: 'China/Macau',
-    localName: '中国澳门',
+    localName: '澳门',
     code: 'MO',
     dialCode: '853',
-    name: '中国澳门',
+    name: '澳门',
     phoneFormat: '6612 3456',
   },
   LU: {
@@ -673,11 +673,12 @@ const countries = {
   },
   TW: {
     enName: 'China/Taiwan',
-    localName: '中国台湾',
+    localName: '台湾',
     code: 'TW',
     dialCode: '886',
-    name: '中国台湾',
+    name: '台湾',
     phoneFormat: '0912 345 678',
+    flagCode: 'CN',
   },
   MD: {
     enName: 'Moldova',
@@ -1313,10 +1314,10 @@ const countries = {
   },
   HK: {
     enName: 'China/Hong Kong',
-    localName: '中国香港',
+    localName: '香港',
     code: 'HK',
     dialCode: '852',
-    name: '中国香港',
+    name: '香港',
     phoneFormat: '5123 4567',
   },
   VN: {
