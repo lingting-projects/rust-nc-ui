@@ -182,7 +182,7 @@ export default () => {
         )}
       />
 
-      {selected && configs.findLast((c) => c.id === selected) && (
+      {(state?.running || configs.findLast((c) => c.id === selected)) && (
         <FooterToolbar
           renderContent={() => {
             let dom;
@@ -221,7 +221,7 @@ export default () => {
                     onClick={() => {
                       setLoading(true);
                       autoReloadState.current = false;
-                      webKernel.stop(selected).finally(() => {
+                      webKernel.stop(state.configId).finally(() => {
                         reloadState().finally(() => {
                           setLoading(false);
                           autoReloadState.current = true;
@@ -245,6 +245,7 @@ export default () => {
                 );
               }
 
+              const id = selected || state.configId;
               doms.push(
                 <Button
                   key={'btn_start'}
@@ -254,7 +255,7 @@ export default () => {
                   onClick={() => {
                     setLoading(true);
                     autoReloadState.current = false;
-                    webKernel.start(selected).finally(() => {
+                    webKernel.start(id).finally(() => {
                       reloadState().finally(() => {
                         setLoading(false);
                         autoReloadState.current = true;
