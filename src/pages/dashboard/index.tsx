@@ -29,9 +29,6 @@ export default () => {
     () =>
       webKernel.state().then((v) => {
         setState(v);
-        if (v.configId) {
-          setSelected(v.configId);
-        }
       }),
     [],
   );
@@ -101,7 +98,15 @@ export default () => {
         renderItem={(item) => (
           <List.Item key={item.id}>
             <Card
-              className={item.id === selected ? styles.selected : undefined}
+              className={
+                (
+                  state?.running
+                    ? item.id === state.configId
+                    : item.id === (selected || state?.configId)
+                )
+                  ? styles.selected
+                  : undefined
+              }
               hoverable={true}
               styles={{
                 body: {
@@ -110,10 +115,9 @@ export default () => {
                 },
               }}
               onClick={() => {
-                if (state?.running) {
-                  return;
+                if (!state?.running) {
+                  setSelected(item.id);
                 }
-                setSelected(item.id);
               }}
             >
               <Card.Meta
@@ -229,7 +233,7 @@ export default () => {
               );
             } else {
               const doms = [];
-              if (state.error) {
+              if (state.error && selected === state.configId) {
                 doms.push(
                   <Tooltip key={'tooltip'} title={state.reason}>
                     <Icon
